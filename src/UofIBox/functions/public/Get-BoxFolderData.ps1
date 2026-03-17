@@ -12,7 +12,7 @@ The ID of the Box folder.
 Get-BoxFolder -FolderId "123456789"
 #>
 
-function Get-BoxFolderMetadata {
+function Get-BoxFolderData {
 
     [CmdletBinding()]
     param(

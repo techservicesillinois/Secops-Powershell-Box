@@ -19,6 +19,9 @@ New-BoxSession -Credential $Credential -EnterpriseId "123456"
 
 function New-BoxSession {
 
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+    "PSUseShouldProcessForStateChangingFunctions",
+    "")]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]

@@ -22,7 +22,7 @@ New-BoxFolderCollaboration -FolderName "Finance" -Collaborators $Users
 #>
 function New-BoxFolderCollaboration {
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)]
         [string]$FolderName,
@@ -34,6 +34,8 @@ function New-BoxFolderCollaboration {
 
         [switch]$ReturnFolderLink
     )
+
+    if ($PSCmdlet.ShouldProcess("Box", "Create folder '$FolderName'")) {
 
     $FolderBody = @{
         name = $FolderName
@@ -50,9 +52,11 @@ function New-BoxFolderCollaboration {
 
     $FolderResponse = Invoke-BoxRestCall @CreateFolder
     $FolderId = $FolderResponse.id
+    }
 
     foreach ($User in $Collaborators) {
 
+    if ($PSCmdlet.ShouldProcess("Box", "Add collaborator $Target")) {
         $CollabBody = @{
             item = @{
                 type = "folder"
@@ -72,6 +76,7 @@ function New-BoxFolderCollaboration {
         }
 
         Invoke-BoxRestCall @CollabCall
+        }
     }
 
     if ($ReturnFolderLink) {

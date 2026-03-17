@@ -14,13 +14,15 @@ Remove-BoxFolder -FolderId "123456789"
 
 function Remove-BoxFolder {
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)]
         [string]$FolderId
     )
 
+    if ($PSCmdlet.ShouldProcess("Folder $FolderId", "Delete")) {
     Invoke-BoxRestCall `
         -RelativeURI "folders/$FolderId?recursive=true" `
         -Method DELETE
+    }
 }

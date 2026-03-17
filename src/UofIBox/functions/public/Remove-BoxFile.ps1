@@ -14,16 +14,17 @@ Remove-BoxFile -FileId "123456789"
 
 function Remove-BoxFile {
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)]
         [string]$FileId
     )
 
-    $Call = @{
-        RelativeURI = "files/$FileId"
-        Method      = "DELETE"
-    }
-
+    if ($PSCmdlet.ShouldProcess("File $FileId", "Delete")) {
+        $Call = @{
+            RelativeURI = "files/$FileId"
+            Method      = "DELETE"
+        }
     Invoke-BoxRestCall @Call
+    }
 }

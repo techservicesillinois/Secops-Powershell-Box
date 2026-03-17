@@ -12,7 +12,7 @@ The ID of the Box file.
 Get-BoxFile -FileId "123456789"
 #>
 
-function Get-BoxFileMetadata {
+function Get-BoxFileData {
 
     [CmdletBinding()]
     param(
