@@ -11,8 +11,11 @@ Name of the folder to create.
 .PARAMETER ParentFolderId
 Parent folder ID.
 
-.PARAMETER Collaborators
-Array of collaborator objects containing login and role.
+.PARAMETER Login
+User email(s) to grant access.
+
+.PARAMETER Role
+Array of roles corresponding to each login.
 
 .PARAMETER ReturnFolderLink
 Returns a link to the folder.
@@ -30,57 +33,66 @@ function New-BoxFolderCollaboration {
         [string]$ParentFolderId = "0",
 
         [Parameter(Mandatory)]
-        [array]$Collaborators,
+        [string[]]$Login,
+
+        [Parameter(Mandatory)]
+        [string[]]$Role,
 
         [switch]$ReturnFolderLink
     )
 
+    if ($Login.Count -ne $Role.Count) {
+        throw "Login and Role counts must match."
+    }
+
     if ($PSCmdlet.ShouldProcess("Box", "Create folder '$FolderName'")) {
 
-    $FolderBody = @{
-        name = $FolderName
-        parent = @{
-            id = $ParentFolderId
-        }
-    }
-
-    $CreateFolder = @{
-        RelativeURI = "folders"
-        Method      = "POST"
-        Body        = $FolderBody
-    }
-
-    $FolderResponse = Invoke-BoxRestCall @CreateFolder
-    $FolderId = $FolderResponse.id
-    }
-
-    foreach ($User in $Collaborators) {
-
-    if ($PSCmdlet.ShouldProcess("Box", "Add collaborator $Target")) {
-        $CollabBody = @{
-            item = @{
-                type = "folder"
-                id   = $FolderId
+        $FolderBody = @{
+            name = $FolderName
+            parent = @{
+                id = $ParentFolderId
             }
-            accessible_by = @{
-                type  = "user"
-                login = $User.login
-            }
-            role = $User.role
         }
 
-        $CollabCall = @{
-            RelativeURI = "collaborations"
+        $CreateFolder = @{
+            RelativeURI = "folders"
             Method      = "POST"
-            Body        = $CollabBody
+            Body        = $FolderBody
         }
 
-        Invoke-BoxRestCall @CollabCall
+        $FolderResponse = Invoke-BoxRestCall @CreateFolder
+        $FolderId = $FolderResponse.id
+
+        for ($i = 0; $i -lt $Login.Count; $i++) {
+
+            $Target = "$($Login[$i]) as $($Role[$i])"
+
+            if ($PSCmdlet.ShouldProcess("Box Folder $FolderId", "Add collaborator $Target")) {
+
+                $CollabBody = @{
+                    item = @{
+                        type = "folder"
+                        id   = $FolderId
+                    }
+                    accessible_by = @{
+                        type  = "user"
+                        login = $Login[$i]
+                    }
+                    role = $Role[$i]
+                }
+
+                $CollabCall = @{
+                    RelativeURI = "collaborations"
+                    Method      = "POST"
+                    Body        = $CollabBody
+                }
+
+                Invoke-BoxRestCall @CollabCall
+            }
         }
     }
 
     if ($ReturnFolderLink) {
-
         return [PSCustomObject]@{
             FolderName = $FolderName
             FolderId   = $FolderId
