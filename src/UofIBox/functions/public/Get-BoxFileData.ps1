@@ -9,7 +9,7 @@ Returns file information including size, name, and owner.
 The ID of the Box file.
 
 .EXAMPLE
-Get-BoxFile -FileId "123456789"
+Get-BoxFileData -FileId "123456789"
 #>
 
 function Get-BoxFileData {

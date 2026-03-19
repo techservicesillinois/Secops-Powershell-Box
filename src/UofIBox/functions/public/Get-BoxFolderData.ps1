@@ -9,7 +9,7 @@ Gets metadata information for a specified Box folder.
 The ID of the Box folder.
 
 .EXAMPLE
-Get-BoxFolder -FolderId "123456789"
+Get-BoxFolderData -FolderId "123456789"
 #>
 
 function Get-BoxFolderData {

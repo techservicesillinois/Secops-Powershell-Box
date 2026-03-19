@@ -19,16 +19,11 @@ It simplifies Box API usage by handling authentication, REST calls, and common o
 
 # How do I install it?
 
-### Option 1: Clone the Repository
-git clone <repo-url>
-cd <repo-folder>
-Import-Module .\BoxAutomation.psm1
+The latest stable release is always available via the PSGallery.
 
-### Option 2: Manual Import
+This will install on the local machine:
 
-Download the module files and import directly:
-
-Import-Module "C:\Path\To\BoxAutomation.psm1"
+Install-Module -Name 'UofIBox'
 
 ### Prerequisites
 
@@ -109,8 +104,6 @@ Refactoring functions for performance or readability
 If contributing:
 
 Follow existing function structure and naming conventions
-
-Use splats instead of backticks
 
 Ensure all functions use Invoke-BoxRestCall
 
