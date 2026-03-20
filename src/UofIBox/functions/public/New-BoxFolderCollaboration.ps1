@@ -21,7 +21,7 @@ Array of roles corresponding to each login.
 Returns a link to the folder.
 
 .EXAMPLE
-New-BoxFolderCollaboration -FolderName "Finance" -Login "user1@company.com" -Role "Editor" -ReturnFolderLink
+New-BoxFolderCollaboration -FolderName "Finance" -ParentFolderId "0" -Login "user1@company.com" -Role "Editor" -ReturnFolderLink
 #>
 function New-BoxFolderCollaboration {
 
