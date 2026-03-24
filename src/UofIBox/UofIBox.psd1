@@ -68,15 +68,16 @@ PowerShellVersion = '7.0'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    'Get-BoxFolderData,'
+    'Get-BoxFolderData',
     'Get-BoxFileData',
     'Invoke-BoxRestCall',
-    'New-BoxFolderCollaboration'
+    'New-BoxCollaboration',
+    'New-BoxFolder',
     'New-BoxSession',
     'Receive-BoxFile',
     'Receive-BoxFolder',
     'Remove-BoxFolder',
-    'Remove-BoxFile'
+    'Remove-BoxFile',
     'Send-BoxFile'
     )
 
