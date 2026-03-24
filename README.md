@@ -1,43 +1,112 @@
-## About
+![Pester Tests](https://github.com/techservicesillinois/Secops-Powershell-Box/workflows/Pester%20Tests/badge.svg)
+![ScriptAnalyzer](https://github.com/techservicesillinois/Secops-Powershell-Box/workflows/ScriptAnalyzer/badge.svg)
 
-This repository is used by Cybersecurity operations teams at the 
-University of Illinois as a GitHub template.
+# What is This?
 
-This resource helps comply with University of Illinois
-Cybersecurity standards - including [IT-07][it07], [IT08][it08],
-and [IT13][it13].
+This is a PowerShell module for automating interactions with the Box API. It provides a clean, reusable set of functions for managing folders, files, and user access within Box.
 
-[it07]: https://go.illinois.edu/secstd-IT07
-[it08]: https://go.illinois.edu/secstd-IT08
-[it13]: https://go.illinois.edu/secstd-IT13
+The module is designed for automation scenarios such as:
 
-See [Cybersecurity Development on the Illinois Knowledge Base][kbsearch]
-for information about our development standards. 
+Ticket-driven provisioning
 
-[kbsearch]: https://answers.uillinois.edu/illinois/search.php?q=cybersecurity+developer&cat=0
+Scheduled jobs
 
-The remainder of this `README.md` contains example text.
+Azure Automation runbooks
 
-## Data Sources
+Security and compliance workflows
 
-|Data Store|Data Type|Sensitivity|Notes|
-|----------|---------|-----------|-----|
+It simplifies Box API usage by handling authentication, REST calls, and common operations behind easy-to-use PowerShell functions.
 
-## Endpoint Connections
+# How do I install it?
 
-|Endpoint|Purpose|Stage|Access|
-|--------|-------|-----|------|
+The latest stable release is always available via the PSGallery.
 
-## Product Support
+This will install on the local machine:
 
-This product is supported by Cybersecurity teams at the
-University of Illinois Urbana-Champaign on a best-effort basis.
+Install-Module -Name 'UofIBox'
 
-As of the last update to this README, the expected End-of-Life and 
-End-of-Support dates of this product are <YEAR MONTH>.
+### Prerequisites
 
-End-of-Life was decided upon based on these dependencies:
+PowerShell 7+
 
-  - <dependency (YEAR MONTH) >
-  - <dependency (YEAR MONTH) >
+A Box application configured for Client Credentials Grant
 
+Box Client ID, Client Secret, and Enterprise ID
+
+# How does it work?
+
+The module is built around two core components:
+
+Authentication
+
+New-BoxSession authenticates to Box using OAuth Client Credentials and stores the access token for reuse.
+
+$Credential = Get-Credential
+New-BoxSession -Credential $Credential
+REST Wrapper
+
+Invoke-BoxRestCall is a centralized wrapper for all API calls. It handles:
+
+Authentication headers
+
+Base URI construction
+
+JSON conversion
+
+Error handling
+
+File downloads
+
+Key Functions
+Folder Management
+
+New-BoxFolderWithCollaboration – Create folders and assign users/roles
+
+Get-BoxFolder – Retrieve folder metadata
+
+Remove-BoxFolder – Delete folders
+
+File Management
+
+Upload-BoxFile – Upload files
+
+Get-BoxFile – Retrieve file metadata
+
+Remove-BoxFile – Delete files
+
+Receive-BoxFile – Download files
+
+Folder Download
+
+Receive-BoxFolder – Recursively downloads a folder and recreates the structure locally
+
+Example Workflow
+$Credential = Get-Credential
+New-BoxSession -Credential $Credential
+
+New-BoxFolderWithCollaboration `
+    -FolderName "SecurityProject" `
+    -Login user@company.com `
+    -Role editor
+
+# How do I help?
+
+Contributions are welcome. You can help by:
+
+Reporting bugs or issues
+
+Suggesting new features
+
+Improving documentation
+
+Refactoring functions for performance or readability
+
+If contributing:
+
+Follow existing function structure and naming conventions
+
+Ensure all functions use Invoke-BoxRestCall
+
+Include comment-based help for all functions
+
+# To Do
