@@ -89,7 +89,7 @@ New-BoxFolderWithCollaboration `
     -Login user@company.com `
     -Role editor
 
-#End-of-Life and End-of-Support Dates
+# End-of-Life and End-of-Support Dates
 
 As of the last update to this README, the expected End-of-Life and End-of-Support dates of this product are November 2026.
 
