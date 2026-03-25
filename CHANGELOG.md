@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.2] - 2026-03-24
+
+    - Updated license file,  and remove borg template
+
 ## [0.0.1] - 2026-03-17
 
 ### Added
