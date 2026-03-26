@@ -60,7 +60,9 @@ File downloads
 Key Functions
 Folder Management
 
-New-BoxFolderWithCollaboration – Create folders and assign users/roles
+New-BoxFolder - Creates folders
+
+New-BoxCollaboration - Adds collaborators to folders
 
 Get-BoxFolder – Retrieve folder metadata
 
