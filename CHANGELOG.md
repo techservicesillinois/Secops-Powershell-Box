@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.4] - 2026-03-31
+
+    - Added the following functions; Get-BoxCollaboration, Set-Box Collaboration, Remove-BoxCollaboration.
+        Get-BoxCollaboration: Returns information about a specific collaborator
+        Set-BoxCollaboration: Changes an existing role for a collaborator
+        Remove-BoxCollaboration: Removes an existing Collaborator
+
 ## [0.0.3] - 2026-03-25
 
     -README Fixes, updated functions list to reflect proper available functions
