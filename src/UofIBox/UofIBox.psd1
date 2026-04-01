@@ -10,7 +10,7 @@
 RootModule = 'UofIBox.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.0'
+ModuleVersion = '1.0.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -79,9 +79,9 @@ FunctionsToExport = @(
     'Remove-BoxFolder',
     'Remove-BoxFile',
     'Send-BoxFile',
-    'get-boxcollaboration',
-    'set-boxcollaboration',
-    'remove-boxcollaboration'
+    'Get-BoxCollaboration',
+    'Set-BoxCollaboration',
+    'Remove-BoxCollaboration'
     )
 
 
