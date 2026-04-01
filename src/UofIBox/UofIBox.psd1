@@ -79,9 +79,9 @@ FunctionsToExport = @(
     'Remove-BoxFolder',
     'Remove-BoxFile',
     'Send-BoxFile',
-    'get-boxcollaboration',
-    'set-boxcollaboration',
-    'remove-boxcollaboration'
+    'Get-BoxCollaboration',
+    'Set-BoxCollaboration',
+    'Remove-BoxCollaboration'
     )
 
 
