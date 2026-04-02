@@ -19,6 +19,9 @@ Hashtable body that will be converted to JSON.
 .PARAMETER Upload
 Switch indicating the upload API endpoint should be used.
 
+.PARAMETER Form
+placeholder
+
 .EXAMPLE
 Invoke-BoxRestCall -RelativeURI "folders/123" -Method GET
 
@@ -38,6 +41,8 @@ function Invoke-BoxRestCall {
 
         [hashtable]$Body,
 
+        [hashtable]$Form,
+
         [switch]$Upload
     )
 
@@ -52,10 +57,12 @@ function Invoke-BoxRestCall {
         }
 
         if ($Upload) {
-            $BaseURI = "https://upload.box.com/api/2.0/"
+            $BaseURI = "$($Script:Settings.UploadBaseURI)"
+            $contentType = "multipart/form-data"
         }
         else {
-            $BaseURI = "https://api.box.com/2.0/"
+            $BaseURI = "$($Script:Settings.BaseURI)"
+            $contentType = "application/json"
         }
     }
 
@@ -64,7 +71,7 @@ function Invoke-BoxRestCall {
         $IVRSplat = @{
             Headers = @{
                 Authorization = "Bearer $($Script:BoxSession.AccessToken)"
-                "Content-Type" = "application/json"
+                "Content-Type" = $contentType
             }
             Method = $Method
             Uri = "$BaseURI$RelativeURI"
@@ -72,6 +79,10 @@ function Invoke-BoxRestCall {
 
         if ($Body) {
             $IVRSplat.Add("Body", ($Body | ConvertTo-Json -Depth 10))
+        }
+
+        if ($Form) {
+            $IVRSplat.Add("Form", $Form)
         }
 
         Write-Verbose "Calling Box API: $Method $RelativeURI"
