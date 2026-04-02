@@ -20,7 +20,7 @@ Hashtable body that will be converted to JSON.
 Switch indicating the upload API endpoint should be used.
 
 .PARAMETER Form
-placeholder
+Hashtable of form fields for multipart form data requests.
 
 .EXAMPLE
 Invoke-BoxRestCall -RelativeURI "folders/123" -Method GET
