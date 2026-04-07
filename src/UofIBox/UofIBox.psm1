@@ -1,3 +1,4 @@
+$Script:Settings = Get-Content -Path "$PSScriptRoot\settings.json" | ConvertFrom-Json
 $Script:BoxSession = $NULL
 [int]$Script:APICallCount = 0
 

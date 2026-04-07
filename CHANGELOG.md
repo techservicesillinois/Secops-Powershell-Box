@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.0.5] - 2026-04-03
+
+### Changed
+    - Updated Send-BoxFile Function to have the ability to send files from memory.
+    - Updated Invoke-BoxRestCall to support Form Settings
+
 ## [0.0.4] - 2026-03-31
 
     - Added the following functions; Get-BoxCollaboration, Set-Box Collaboration, Remove-BoxCollaboration.
