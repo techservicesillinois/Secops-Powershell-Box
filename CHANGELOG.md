@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.5] - 2026-04-03
 
+### Changed
+
+
     - Updated Send-BoxFile Function to have the ability to send files from memory.
     - Updated Invoke-BoxRestCall to support Form Settings
 
